@@ -3,9 +3,9 @@ import { motion, useInView } from 'framer-motion';
 
 const Marquee = ({ items, direction = "left", speed = 20 }) => {
   return (
-    <div className="overflow-hidden py-4">
+    <div className="overflow-hidden py-2">
       <motion.div
-        className="flex gap-8"
+        className="flex gap-3 sm:gap-4 md:gap-6"
         animate={{
           x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
         }}
@@ -33,19 +33,16 @@ const About = () => {
   const isInView = useInView(ref, { once: false, threshold: 0.3 });
 
   const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "3+", label: "Years Experience" },
-    { number: "30+", label: "Technologies" },
-    { number: "100%", label: "Client Satisfaction" }
+    { number: "50+", label: "Projects" },
+    { number: "3+", label: "Years Exp" },
+    { number: "30+", label: "Tech Stack" },
+    { number: "100%", label: "Satisfaction" }
   ];
 
   const skillCategories = {
-    "Frontend": ["React", "Next.js", "TypeScript", "Vue.js", "Tailwind CSS", "Redux", "Sass", "Framer Motion"],
-    "Backend": ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB", "GraphQL", "Redis", "REST APIs"],
-    
+    "Frontend": ["React", "Next.js", "TypeScript", "Vue.js", "Tailwind", "Redux"],
+    "Backend": ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB", "GraphQL"],
   };
-
-  const learning = ["Go", "Rust", "Kubernetes", "Three.js", "WebAssembly", "TensorFlow", "D3.js", "Electron"];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,29 +72,29 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="min-h-screen bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="min-h-screen bg-white py-8 sm:py-12 lg:py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <motion.h2 
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3"
             whileHover={{ x: 4 }}
           >
             About Me
           </motion.h2>
           <motion.div 
-            className="w-16 h-0.5 bg-gray-900 mx-auto mb-6"
+            className="w-12 h-0.5 bg-gray-900 mx-auto mb-4"
             initial={{ width: 0 }}
-            animate={{ width: 64 }}
+            animate={{ width: 48 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           />
           <motion.p 
-            className="text-gray-600 max-w-2xl mx-auto"
+            className="text-gray-600 text-sm sm:text-base max-w-md mx-auto px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -112,17 +109,17 @@ const About = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-start"
         >
           {/* Left Column - Visual */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="space-y-6 order-2 lg:order-1 w-full">
             {/* Profile Image */}
             <motion.div 
-              className="relative group mx-auto max-w-md"
+              className="relative group mx-auto w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80"
               whileHover="hover"
             >
               <motion.div
-                className="relative w-full aspect-square overflow-hidden rounded-2xl border-4 border-gray-200 bg-linear-to-br from-gray-100 to-gray-200"
+                className="relative w-full h-full overflow-hidden rounded-xl border-2 border-gray-200 bg-gradient-to-br from-gray-100 to-gray-200"
                 variants={{
                   initial: { rotate: 0 },
                   hover: { rotate: -1 }
@@ -130,20 +127,20 @@ const About = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-gray-400 text-lg">Your Profile Image</span>
+                  <span className="text-gray-400 text-sm">Profile Image</span>
                 </div>
                 
                 {/* Animated Border */}
                 <motion.div
-                  className="absolute inset-0 border-2 border-transparent bg-linear-to-r from-gray-900 to-gray-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                  className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-gray-900 to-gray-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
                 />
               </motion.div>
 
               {/* Floating Elements */}
               <motion.div
-                className="absolute -top-3 -right-3 w-14 h-14 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow-lg"
+                className="absolute -top-2 -right-2 w-8 h-8 sm:w-10 sm:h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow-sm"
                 animate={{ 
-                  y: [0, -10, 0],
+                  y: [0, -6, 0],
                   rotate: [0, 5, 0]
                 }}
                 transition={{ 
@@ -152,13 +149,13 @@ const About = () => {
                   ease: "easeInOut" 
                 }}
               >
-                <span className="text-xl">🚀</span>
+                <span className="text-sm">🚀</span>
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-3 -left-3 w-12 h-12 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow-lg"
+                className="absolute -bottom-2 -left-2 w-7 h-7 sm:w-9 sm:h-9 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow-sm"
                 animate={{ 
-                  y: [0, 8, 0],
+                  y: [0, 4, 0],
                   rotate: [0, -5, 0]
                 }}
                 transition={{ 
@@ -168,39 +165,37 @@ const About = () => {
                   delay: 1 
                 }}
               >
-                <span className="text-xl">💡</span>
+                <span className="text-sm">💡</span>
               </motion.div>
             </motion.div>
 
             {/* Stats Grid */}
             <motion.div 
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-2 gap-3 max-w-xs mx-auto"
               variants={containerVariants}
             >
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   variants={itemVariants}
-                  className="text-center p-6 bg-white border border-gray-200 rounded-xl"
+                  className="text-center p-3 bg-white border border-gray-200 rounded-lg"
                   whileHover={{ 
-                    y: -4,
+                    y: -2,
                     scale: 1.02,
-                    transition: { type: "spring", stiffness: 400 }
                   }}
                 >
                   <motion.div
-                    className="text-2xl font-bold text-gray-900 mb-2"
+                    className="text-lg sm:text-xl font-bold text-gray-900 mb-1"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ 
                       type: "spring", 
                       delay: 0.6 + index * 0.1,
-                      stiffness: 200 
                     }}
                   >
                     {stat.number}
                   </motion.div>
-                  <div className="text-sm text-gray-600 font-medium">
+                  <div className="text-xs text-gray-600 font-medium">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -209,53 +204,51 @@ const About = () => {
           </motion.div>
 
           {/* Right Column - Content */}
-          <motion.div variants={itemVariants} className="space-y-8">
+          <motion.div variants={itemVariants} className="space-y-6 order-1 lg:order-2 w-full">
             {/* Introduction */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="space-y-4">
               <motion.h3 
-                className="text-3xl font-bold text-gray-900"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Hi, I'm <span className="text-gray-700">Priyansha Tiwari</span>
+                Hi, I'm <span className="text-gray-700">Priyansha</span>
               </motion.h3>
               
               <motion.div 
-                className="w-12 h-1 bg-gray-900"
+                className="w-10 h-0.5 bg-gray-900"
                 initial={{ width: 0 }}
-                animate={{ width: 48 }}
+                animate={{ width: 40 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               />
             </motion.div>
 
             {/* Description */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-3">
               <motion.p 
-                className="text-gray-700 leading-relaxed text-lg"
+                className="text-gray-700 leading-relaxed text-sm sm:text-base"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
-                A passionate software developer dedicated to creating elegant solutions to complex problems. 
-                I believe in writing clean, maintainable code that not only works but also tells a story.
+                A passionate software developer dedicated to creating elegant solutions to complex problems.
               </motion.p>
 
               <motion.p 
-                className="text-gray-700 leading-relaxed text-lg"
+                className="text-gray-700 leading-relaxed text-sm sm:text-base"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.9 }}
               >
-                With expertise across the full development stack, I specialize in building scalable applications 
-                that prioritize user experience, performance, and maintainability.
+                I specialize in building scalable applications that prioritize user experience and performance.
               </motion.p>
             </motion.div>
 
             {/* Skills Marquee */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="space-y-4">
               <motion.h4 
-                className="text-xl font-bold text-gray-900"
+                className="text-lg font-bold text-gray-900"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1 }}
@@ -263,24 +256,24 @@ const About = () => {
                 Tech Stack
               </motion.h4>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {Object.entries(skillCategories).map(([category, skills], index) => (
                   <motion.div
                     key={category}
-                    className="space-y-3"
+                    className="space-y-2"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.3 + index * 0.2 }}
                   >
-                    <h5 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                    <h5 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
                       {category}
                     </h5>
-                    <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
                       <Marquee 
                         items={skills.map((skill) => (
                           <motion.span
                             key={skill}
-                            className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium text-gray-700 whitespace-nowrap mx-2"
+                            className="px-2 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium text-gray-700 whitespace-nowrap mx-1"
                             whileHover={{ 
                               scale: 1.05,
                               backgroundColor: "#f8fafc"
@@ -290,14 +283,13 @@ const About = () => {
                           </motion.span>
                         ))}
                         direction={index % 2 === 0 ? "left" : "right"}
-                        speed={25 - index * 3}
+                        speed={20}
                       />
                     </div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
-
           </motion.div>
         </motion.div>
       </div>

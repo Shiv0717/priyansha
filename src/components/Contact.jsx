@@ -1,5 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Linkedin, 
+  Github, 
+  Twitter, 
+  Instagram, 
+  Dribbble,
+  Send,
+  User,
+  MessageSquare
+} from 'lucide-react';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -13,25 +26,25 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      icon: '📧',
+      icon: Mail,
       title: 'Email',
       value: 'priyansha@example.com',
       link: 'mailto:priyansha@example.com'
     },
     {
-      icon: '📱',
+      icon: Phone,
       title: 'Phone',
       value: '+1 (555) 123-4567',
       link: 'tel:+15551234567'
     },
     {
-      icon: '📍',
+      icon: MapPin,
       title: 'Location',
       value: 'San Francisco, CA',
       link: null
     },
     {
-      icon: '💼',
+      icon: Linkedin,
       title: 'LinkedIn',
       value: 'linkedin.com/in/priyansha',
       link: 'https://linkedin.com/in/priyansha'
@@ -42,22 +55,22 @@ const Contact = () => {
     {
       name: 'GitHub',
       url: 'https://github.com/priyansha',
-      icon: '💻'
+      icon: Github
     },
     {
       name: 'Twitter',
       url: 'https://twitter.com/priyansha',
-      icon: '🐦'
+      icon: Twitter
     },
     {
       name: 'Instagram',
       url: 'https://instagram.com/priyansha',
-      icon: '📸'
+      icon: Instagram
     },
     {
       name: 'Dribbble',
       url: 'https://dribbble.com/priyansha',
-      icon: '🎨'
+      icon: Dribbble
     }
   ];
 
@@ -188,53 +201,56 @@ const Contact = () => {
 
             {/* Contact Methods */}
             <div className="space-y-6">
-              {contactMethods.map((method, index) => (
-                <motion.div
-                  key={method.title}
-                  variants={cardVariants}
-                  whileHover="hover"
-                  className="flex items-center p-6 bg-white border border-gray-200 rounded-xl"
-                >
-                  <motion.div 
-                    className="text-2xl mr-4"
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 400 }}
+              {contactMethods.map((method, index) => {
+                const IconComponent = method.icon;
+                return (
+                  <motion.div
+                    key={method.title}
+                    variants={cardVariants}
+                    whileHover="hover"
+                    className="flex items-center p-6 bg-white border border-gray-200 rounded-xl group"
                   >
-                    {method.icon}
-                  </motion.div>
-                  <div className="flex-1">
-                    <motion.h4 
-                      className="font-semibold text-gray-900 mb-1"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
+                    <motion.div 
+                      className="p-3 bg-gray-100 rounded-lg mr-4 group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400 }}
                     >
-                      {method.title}
-                    </motion.h4>
-                    {method.link ? (
-                      <motion.a
-                        href={method.link}
-                        className="text-gray-600 hover:text-gray-900 transition-colors duration-300"
+                      <IconComponent size={24} />
+                    </motion.div>
+                    <div className="flex-1">
+                      <motion.h4 
+                        className="font-semibold text-gray-900 mb-1"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        whileHover={{ x: 4 }}
+                        transition={{ delay: 0.4 + index * 0.1 }}
                       >
-                        {method.value}
-                      </motion.a>
-                    ) : (
-                      <motion.p
-                        className="text-gray-600"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                      >
-                        {method.value}
-                      </motion.p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+                        {method.title}
+                      </motion.h4>
+                      {method.link ? (
+                        <motion.a
+                          href={method.link}
+                          className="text-gray-600 hover:text-gray-900 transition-colors duration-300"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 + index * 0.1 }}
+                          whileHover={{ x: 4 }}
+                        >
+                          {method.value}
+                        </motion.a>
+                      ) : (
+                        <motion.p
+                          className="text-gray-600"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 + index * 0.1 }}
+                        >
+                          {method.value}
+                        </motion.p>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Social Links */}
@@ -253,26 +269,29 @@ const Contact = () => {
                 Follow Me
               </motion.h4>
               <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.url}
-                    className="flex items-center justify-center w-12 h-12 bg-white border border-gray-200 rounded-lg"
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={index}
-                    whileHover="hover"
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <motion.span
-                      className="text-lg"
-                      whileHover={{ scale: 1.2 }}
+                {socialLinks.map((social, index) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <motion.a
+                      key={social.name}
+                      href={social.url}
+                      className="flex items-center justify-center w-12 h-12 bg-white border border-gray-200 rounded-lg group hover:border-gray-900 transition-colors duration-300"
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      custom={index}
+                      whileHover="hover"
+                      whileTap={{ scale: 0.95 }}
                     >
-                      {social.icon}
-                    </motion.span>
-                  </motion.a>
-                ))}
+                      <motion.div
+                        className="text-gray-600 group-hover:text-gray-900 transition-colors duration-300"
+                        whileHover={{ scale: 1.2 }}
+                      >
+                        <IconComponent size={20} />
+                      </motion.div>
+                    </motion.a>
+                  );
+                })}
               </div>
             </motion.div>
           </motion.div>
@@ -287,11 +306,12 @@ const Contact = () => {
               transition={{ delay: 0.6 }}
             >
               <motion.h3 
-                className="text-3xl font-bold text-gray-900 mb-8"
+                className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
+                <MessageSquare size={32} />
                 Send a Message
               </motion.h3>
 
@@ -301,7 +321,8 @@ const Contact = () => {
                   variants={itemVariants}
                   className="space-y-2"
                 >
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <User size={16} />
                     Name *
                   </label>
                   <motion.input
@@ -322,7 +343,8 @@ const Contact = () => {
                   variants={itemVariants}
                   className="space-y-2"
                 >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <Mail size={16} />
                     Email *
                   </label>
                   <motion.input
@@ -392,17 +414,19 @@ const Contact = () => {
                   y: -2
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full bg-gray-900 text-white py-4 px-6 rounded-lg font-medium text-lg transition-colors duration-300 border border-gray-900"
+                className="w-full bg-gray-900 text-white py-4 px-6 rounded-lg font-medium text-lg transition-colors duration-300 border border-gray-900 flex items-center justify-center gap-3"
               >
+                <Send size={20} />
                 Send Message
               </motion.button>
 
               <motion.p 
-                className="text-center text-gray-500 text-sm mt-4"
+                className="text-center text-gray-500 text-sm mt-4 flex items-center justify-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
               >
+                <Mail size={16} />
                 I typically respond within 24 hours
               </motion.p>
             </motion.form>
@@ -417,10 +441,11 @@ const Contact = () => {
           transition={{ delay: 1.5 }}
         >
           <motion.p 
-            className="text-gray-600"
+            className="text-gray-600 flex items-center justify-center gap-2"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
+            <MapPin size={16} />
             Currently available for freelance opportunities and full-time positions
           </motion.p>
         </motion.div>
