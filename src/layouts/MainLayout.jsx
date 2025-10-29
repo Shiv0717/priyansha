@@ -30,7 +30,7 @@ function MainLayout() {
   return (
     <div>
       <Navbar />
-      <main style={{ padding: "1rem" }}>
+      <main >
         <Outlet />
       </main>
       <Footer />

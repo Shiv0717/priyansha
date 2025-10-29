@@ -1,195 +1,209 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
-  const [currentWord, setCurrentWord] = useState(0);
-
-  const roles = [
-    "Software Developer",
-    "Full Stack Engineer", 
-    "UI/UX Enthusiast",
-    "Problem Solver",
-    "Tech Innovator"
-  ];
-
-  const techStack = ["React", "Node.js", "TypeScript", "Python", "AWS", "MongoDB"];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100,
-      }
-    }
-  };
-
   return (
-    <section id="home" className="min-h-screen py-0 lg:py-20 bg-white flex items-center justify-center relative overflow-hidden">
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  w-full">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center space-y-8 lg:space-y-12"
-        >
-          {/* Name */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <motion.h1 
-              className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tighter leading-none"
-              whileHover={{ scale: 1.02 }}
-            >
-              <span className="text-gray-900">
-                PRIYANSHA
-              </span>
-              <motion.span 
-                className="block text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-gray-700 mt-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                TIWARI
-              </motion.span>
-            </motion.h1>
-          </motion.div>
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white overflow-hidden">
+      {/* Google Fonts Import */}
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Urbanist:wght@300..900&display=swap');
+      `}</style>
 
-          {/* Animated Role Text */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <div className="h-12 sm:h-16 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.h2
-                  key={currentWord}
-                  className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-light text-gray-600 tracking-widest uppercase"
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -50, opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {roles[currentWord]}
-                </motion.h2>
-              </AnimatePresence>
+      {/* Background Elements - Same as About */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/5 rounded-full blur-2xl"></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          {/* Professional Intro */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 lg:mb-20 relative"
+          >
+            {/* Floating Subheadings - Same as About */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, rotate: -5 }}
+              animate={{ opacity: 1, x: 0, rotate: -4 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden lg:block"
+            >
+              <p
+                className="text-2xl text-white px-6 py-3 rounded-2xl backdrop-blur-sm"
+                style={{ fontFamily: "'Caveat', cursive" }}
+              >
+                Crafting digital <br />experiences
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30, rotate: 5 }}
+              animate={{ opacity: 1, x: 0, rotate: 4 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block"
+            >
+              <p
+                className="text-2xl text-white px-6 py-3 rounded-2xl backdrop-blur-sm"
+                style={{ fontFamily: "'Caveat', cursive" }}
+              >
+                Building the <br />future
+              </p>
+            </motion.div>
+
+            {/* Mobile Subheadings */}
+            <div className="lg:hidden flex justify-center gap-8 mb-8">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-xl text-white bg-gradient-to-r from-blue-400/20 to-purple-400/20 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-sm"
+                style={{ fontFamily: "'Caveat', cursive" }}
+              >
+                Digital Craftsmanship
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-xl text-white bg-gradient-to-r from-purple-400/20 to-pink-400/20 px-4 py-2 rounded-xl border border-white/10 backdrop-blur-sm"
+                style={{ fontFamily: "'Caveat', cursive" }}
+              >
+                Future Builder
+              </motion.p>
             </div>
 
-            {/* Animated Divider */}
-            <motion.div 
-              className="flex justify-center items-center space-x-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
+            {/* Main Heading - Same style as About */}
+            <motion.h1
+              className="text-5xl md:text-6xl lg:text-7xl font-black mb-6"
+              style={{ fontFamily: "'Urbanist', sans-serif" }}
             >
-              <motion.div 
-                className="w-8 h-0.5 bg-gray-400"
-                initial={{ width: 0 }}
-                animate={{ width: 32 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-              />
-              <motion.div 
-                className="w-2 h-2 bg-gray-600 rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <motion.div 
-                className="w-8 h-0.5 bg-gray-400"
-                initial={{ width: 0 }}
-                animate={{ width: 32 }}
-                transition={{ delay: 1.7, duration: 0.8 }}
-              />
+              Hello, I'm{" "}
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Priyansha
+              </span>
+            </motion.h1>
+            
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100px" }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto rounded-full"
+            ></motion.div>
+
+            {/* Bottom Subheading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-8"
+            >
+              <p
+                className="text-xl text-gray-300 italic max-w-2xl mx-auto"
+                style={{ fontFamily: "'Caveat', cursive" }}
+              >
+                "Full-Stack Developer & Creative Problem Solver"
+              </p>
             </motion.div>
           </motion.div>
 
           {/* Description */}
-          <motion.div variants={itemVariants} className="max-w-3xl mx-auto">
-            <motion.p 
-              className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-light px-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.8 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="max-w-2xl mx-auto mb-12"
+          >
+            <p 
+              className="text-lg text-gray-300 leading-relaxed mb-8 font-light"
+              style={{ fontFamily: "'Urbanist', sans-serif" }}
             >
-              Crafting <span className="font-medium text-gray-900">digital experiences</span> with 
-              clean code and innovative solutions. Specializing in modern web technologies 
-              and <span className="font-medium text-gray-900">user-centric design</span>.
-            </motion.p>
+              I craft digital experiences through clean code and thoughtful design. 
+              Specializing in modern web technologies to build fast, accessible, 
+              and user-centered applications that make a difference.
+            </p>
           </motion.div>
 
-          {/* Tech Stack */}
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-2xl mx-auto"
-          >
-            {techStack.map((tech, index) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2 + index * 0.1, type: "spring" }}
-                whileHover={{ 
-                  scale: 1.1, 
-                  y: -5,
-                  transition: { type: "spring", stiffness: 400 }
-                }}
-                className="px-4 py-2 bg-gray-100 rounded-full text-sm sm:text-base text-gray-700 font-medium border border-gray-200"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </motion.div>
+         
 
-          {/* CTA Buttons */}
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+          {/* Tech Stack - Same style as About */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="max-w-md mx-auto"
           >
-            <motion.button
-              whileHover={{ 
-                scale: 1.05,
-                y: -2,
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gray-900 text-white px-8 py-4 rounded-full text-lg font-medium tracking-wide border-2 border-gray-900"
+            <p 
+              className="text-sm text-gray-500 mb-4 tracking-widest uppercase"
+              style={{ fontFamily: "'Urbanist', sans-serif" }}
             >
-              View My Work
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ 
-                scale: 1.05,
-                y: -2,
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-gray-700 px-8 py-4 rounded-full text-lg font-medium tracking-wide border-2 border-gray-300"
-            >
-              Download Resume
-            </motion.button>
+              Technologies I work with
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'MongoDB'].map((tech) => (
+                <motion.span
+                  key={tech}
+                  className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-gray-300 text-sm font-medium"
+                  style={{ fontFamily: "'Urbanist', sans-serif" }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: "rgba(59, 130, 246, 0.1)",
+                    borderColor: "#3B82F6"
+                  }}
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-     
+      {/* Floating Elements - Same as About */}
+      <motion.div
+        className="absolute top-20 left-20 w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full shadow-lg"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-20 w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg"
+        animate={{
+          y: [0, 20, 0],
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      {/* Scroll Indicator - Same style */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <div className="text-center">
+          <div 
+            className="text-sm text-gray-400 tracking-widest mb-3"
+            style={{ fontFamily: "'Urbanist', sans-serif" }}
+          >
+            SCROLL TO EXPLORE
+          </div>
+          <div className="w-px h-12 bg-gradient-to-b from-blue-400/50 to-transparent mx-auto" />
+        </div>
+      </motion.div>
     </section>
   );
 };
