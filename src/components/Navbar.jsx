@@ -105,10 +105,11 @@ const Navbar = () => {
                 Priyansha Tiwari
               </motion.a>
               <motion.span 
-                className="text-[8px] text-gray-400 font-medium px-1 rounded-full mt-1 inline-block w-fit"
+                className="text-[10px] text-gray-400 font-medium rounded-full  inline-block w-fit"
                 transition={{ duration: 0.3 }}
+                style={{ fontFamily: "'Caveat', cursive" }}
               >
-                Frontend Developer
+                Software Developer
               </motion.span>
             </div>
           </motion.div>
